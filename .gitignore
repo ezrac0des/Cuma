@@ -2,3 +2,15 @@ configuration.properties
 # Project exclude paths
 /target/
 .idea/
+.idea
+.idea/compiler.xml
+*/dbnavigator.xml
+*/encodings.xml
+*/jarRepositories.xml
+*/misc.xml
+*/uiDesigner.xml
+*/vcs.xml
+*/workspace.xml
+.idea/.gitignore
+target/generated-test-sources
+target/test-classes
