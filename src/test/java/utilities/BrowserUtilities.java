@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
+import static stepDefinitions.Hooks.driver;
+
 
 public class BrowserUtilities {
     @Nullable
@@ -168,4 +170,23 @@ public class BrowserUtilities {
         List<String> windowHandles = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(windowHandles.get(index));
     }
+
+    public static void staleElementClick(WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .ignoring(StaleElementReferenceException.class)
+                .until((WebDriver d) -> {
+                    element.click();
+                    return true;
+                });
+    }
+
+    public static void staleElementVisible(WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .ignoring(StaleElementReferenceException.class)
+                .until((WebDriver d) -> {
+                    Assert.assertTrue(element.isDisplayed());
+                    return true;
+                });
+    }
+
 }
