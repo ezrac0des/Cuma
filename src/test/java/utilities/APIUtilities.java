@@ -15,11 +15,10 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class APIUtilities {
-
     public static Response response;
     public static RequestSpecification specification = new RequestSpecBuilder().
-            addCookie(new Cookie.Builder("PHPSESSID", "4l3q50e4gdtlp8omq1vlvfj92g").build()).
-            setBaseUri("https://test.hypnotes.net/api/").setRelaxedHTTPSValidation().build();
+            addCookie(new Cookie.Builder("PHPSESSID", ConfigReader.getProperty("cookie")).build()).
+            setBaseUri(ConfigReader.getProperty("baseURI")).setRelaxedHTTPSValidation().build();
 
     //Cookie ekleme
     public static void addCookie(String key, String value){
