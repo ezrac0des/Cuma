@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

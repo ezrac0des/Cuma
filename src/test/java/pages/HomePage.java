@@ -42,8 +42,6 @@ public class HomePage extends CommonPage {
     @FindBy(css = ".dot")
     public List<WebElement> dots;
 
-
-
     @FindBy(css = ".details.LandingPage_textDark__EZpFS")
     public List<WebElement> testimonials;
 
@@ -55,4 +53,5 @@ public class HomePage extends CommonPage {
 
     @FindBy(css = ".BaseFooter_footerCol__kUthZ ul li")
     public List<WebElement> footerLinks;
+
 }

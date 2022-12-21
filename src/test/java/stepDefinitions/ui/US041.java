@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -13,10 +13,9 @@ import utilities.BrowserUtilities;
 import utilities.ConfigReader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static stepDefinitions.Hooks.driver;
+import static stepDefinitions.ui.Hooks.driver;
 
 public class US041 {
     LoginPage lp = new LoginPage();

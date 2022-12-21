@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/reports/rerun.txt"
         },
         features = "src/test/resources/features",
-        glue = "stepDefinitions",
+        glue = "stepDefinitions/ui",
         tags = "@smoke"
 )
 public class CukesRunner {
