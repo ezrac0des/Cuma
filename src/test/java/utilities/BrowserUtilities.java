@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
-import static stepDefinitions.Hooks.driver;
+import static stepDefinitions.ui.Hooks.driver;
 
 
 public class BrowserUtilities {

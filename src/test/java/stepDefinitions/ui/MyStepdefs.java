@@ -1,9 +1,9 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.Given;
 import utilities.ConfigReader;
 
-import static stepDefinitions.Hooks.driver;
+import static stepDefinitions.ui.Hooks.driver;
 
 public class MyStepdefs {
     @Given("user goes to {string}")
