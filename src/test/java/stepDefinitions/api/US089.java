@@ -6,8 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 import static utilities.APIUtilities.*;
@@ -64,14 +66,39 @@ public class US089 {
     @Then("user verifies {int} is not in the list")
     public void userVerifiesIsNotInTheList(int notFound) {
         //[0].id ==349
-        Map<String, Object> parsed = response.jsonPath().get("find {it.id = '349'}");
-        int numberOfPair = parsed.keySet().size();
-        System.out.println(numberOfPair);
+//        Map<String, Object> parsed = response.jsonPath().get("find { it.id: { $ne: " + notFound + " } }");
+//        int numberOfPair = parsed.keySet().size();
+//        System.out.println(numberOfPair);
+//
+//        for (int i = 0; i < numberOfPair - 1; i++) {
+//            Assert.assertNotEquals(String.valueOf(notFound), response.jsonPath().get("[" + i + "].id").toString());
+//            System.out.println(notFound + " is not equals to " + response.jsonPath().getInt("[" + i + "].id"));
+//        }
 
-        for (int i = 0; i < numberOfPair-1; i++) {
-            Assert.assertNotEquals(notFound, response.jsonPath().getInt("[" + i + "].id"));
-            System.out.println(notFound + " is not equals to " + response.jsonPath().getInt("[" + i + "].id"));
+        ArrayList<Integer> allIds = response.path("id");
+        int ids = allIds.size();
+
+
+        for (int i = 0; i < ids; i++) {
+            Assert.assertNotEquals(notFound+"", allIds.get(i)+"");
+            System.out.println(notFound + " is equals to " + response.jsonPath().getInt("[" + i + "].id"));
         }
 
+    }
+
+    @Then("user verifies {int} is in the list")
+    public void userVerifiesIsInTheList(int found) {
+        //[0].id ==349
+//        Map<String, Object> parsed = response.jsonPath().get("find {id = '" + found + "'}");
+//        int numberOfPair = parsed.keySet().size();
+
+        List<Integer> allIds = response.jsonPath().getList("id");
+        int ids = allIds.size();
+        boolean var = false;
+
+        for (int i = 0; i < ids; i++) {
+            if(allIds.get(i).equals(found)) var =true;
+        }
+        Assert.assertTrue(var);
     }
 }
