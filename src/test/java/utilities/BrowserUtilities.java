@@ -2,16 +2,17 @@ package utilities;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import javax.annotation.Nullable;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static stepDefinitions.ui.Hooks.driver;
 
@@ -188,5 +189,29 @@ public class BrowserUtilities {
                     return true;
                 });
     }
+
+    public static String getDay_day_month_year_time(int hourToSkip){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR, hourToSkip);
+        SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:MM:ss");
+        return format1.format(cal.getTime());
+    }
+
+    public static String createDate(int year,int month,int day) {
+        DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;   //2022-12-23
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime date = now.plusYears(year).plusMonths(month).plusDays(day);
+        return dtf.format(date);
+    }
+
+    public static String createTime(int hour,int minute) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR, hour);
+        cal.add(Calendar.MINUTE, minute);
+        SimpleDateFormat simpleformat = new SimpleDateFormat("HH.mm");
+        String strTime = simpleformat.format(new Date());
+        return strTime;
+    }
+
 
 }
