@@ -10,7 +10,7 @@ import utilities.BrowserUtilities;
 
 import java.util.List;
 
-import static stepDefinitions.ui.Hooks.driver;
+import static stepDefinitions.Hooks.driver;
 
 
 public class US_009_stepDef {

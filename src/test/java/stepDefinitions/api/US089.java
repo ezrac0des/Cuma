@@ -18,14 +18,15 @@ public class US089 {
     @Given("user connects to the {string} with payload")
     public void userConnectsToTheWithPayload(String endpoint, DataTable dataTable) {
         Map<String, String> payload = dataTable.asMaps().get(0);
-/*
+
+        /*
         response = given()
                 .spec(specification)
                 .formParams(payload)
-                .post(endpoint);*/
+                .post(endpoint);
+         */
 
         connectWithPostMethodFormParams(endpoint, payload);
-
         response.prettyPrint();
     }
 
@@ -65,25 +66,24 @@ public class US089 {
 
     @Then("user verifies {int} is not in the list")
     public void userVerifiesIsNotInTheList(int notFound) {
-        //[0].id ==349
-//        Map<String, Object> parsed = response.jsonPath().get("find { it.id: { $ne: " + notFound + " } }");
-//        int numberOfPair = parsed.keySet().size();
-//        System.out.println(numberOfPair);
-//
-//        for (int i = 0; i < numberOfPair - 1; i++) {
-//            Assert.assertNotEquals(String.valueOf(notFound), response.jsonPath().get("[" + i + "].id").toString());
-//            System.out.println(notFound + " is not equals to " + response.jsonPath().getInt("[" + i + "].id"));
-//        }
+        /*
+        [0].id ==349
+        Map<String, Object> parsed = response.jsonPath().get("find { it.id: { $ne: " + notFound + " } }");
+        int numberOfPair = parsed.keySet().size();
+        System.out.println(numberOfPair);
+
+        for (int i = 0; i < numberOfPair - 1; i++) {
+            Assert.assertNotEquals(String.valueOf(notFound), response.jsonPath().get("[" + i + "].id").toString());
+            System.out.println(notFound + " is not equals to " + response.jsonPath().getInt("[" + i + "].id"));
+        }
+        */
 
         ArrayList<Integer> allIds = response.path("id");
         int ids = allIds.size();
-
-
         for (int i = 0; i < ids; i++) {
-            Assert.assertNotEquals(notFound+"", allIds.get(i)+"");
+            Assert.assertNotEquals(notFound + "", allIds.get(i) + "");
             System.out.println(notFound + " is equals to " + response.jsonPath().getInt("[" + i + "].id"));
         }
-
     }
 
     @Then("user verifies {int} is in the list")
@@ -97,7 +97,7 @@ public class US089 {
         boolean var = false;
 
         for (int i = 0; i < ids; i++) {
-            if(allIds.get(i).equals(found)) var =true;
+            if (allIds.get(i).equals(found)) var = true;
         }
         Assert.assertTrue(var);
     }

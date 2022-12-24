@@ -14,14 +14,16 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static stepDefinitions.Hooks.*;
 
 public class APIUtilities {
     public static Response response;
     public static RequestSpecification specification = new RequestSpecBuilder().
-            addCookie(new Cookie.Builder("PHPSESSID", ConfigReader.getProperty("cookie")).build()).
+            addCookie(new Cookie.Builder("PHPSESSID", userSessionID).build()).
             setBaseUri(ConfigReader.getProperty("baseURI")).setRelaxedHTTPSValidation().build();
 
     static Map<String, Object> payload = new HashMap<>();
+
     public static int addCoupon(String promoCode, int startDate, int endDate, int usersLimit, int discountRate, String discountType, int category) {
         payload.put("promoCode", promoCode);
         payload.put("startedAt", BrowserUtilities.getDay_day_month_year_time(startDate));
@@ -42,29 +44,29 @@ public class APIUtilities {
         return response.jsonPath().get("promoCode.id");
     }
 
-    public static void deleteCoupon(int couponId){
+    public static void deleteCoupon(int couponId) {
         payload.put("couponId", couponId);
 
         response = given()
                 .spec(specification)
-                .headers("content-type","application/x-www-form-urlencoded")
+                .headers("content-type", "application/x-www-form-urlencoded")
                 .formParams(payload)
                 .post("/promoCode/deleteCoupon");
 
         response.prettyPrint();
     }
 
-    public static List<Integer> getCoupons(){
+    public static List<Integer> getCoupons() {
         response = given()
                 .spec(specification)
-                .headers("content-type","application/x-www-form-urlencoded")
+                .headers("content-type", "application/x-www-form-urlencoded")
                 .post("/promoCode/getCoupons");
 
         response.prettyPrint();
         return response.jsonPath().getList("id");
     }
 
-    public static int createTimeoff(String specificDate, String startAt, String finishAt, String title, boolean isAll ){
+    public static int createTimeoff(String specificDate, String startAt, String finishAt, String title, boolean isAll) {
         payload.put("specificDate", specificDate);
         payload.put("startAt", startAt);
         payload.put("finishAt", finishAt);
@@ -73,16 +75,13 @@ public class APIUtilities {
 
         response = given()
                 .spec(specification)
-                .headers("content-type","application/x-www-form-urlencoded")
+                .headers("content-type", "application/x-www-form-urlencoded")
                 .formParams(payload)
                 .post("/hypnotherapist/timeoff/create");
 
         response.prettyPrint();
         return response.jsonPath().getInt("data[0].id");
     }
-
-
-
 
 
     //Cookie ekleme
@@ -137,13 +136,12 @@ public class APIUtilities {
                 spec(specification).
                 formParams(data).
                 post(endPoint);
-
     }
 
     // Kullanıcı istediği endpoint'e post tipinde ve daları body bölümünde göndererek bağlanabilecek
     public static void connectWithPostMethodBody(String endPoint, Map<String, String> data) {
-
         JSONObject object = new JSONObject();
+
         for (String s : data.keySet()) {
             object.put(s, data.get(s));
         }
@@ -152,7 +150,8 @@ public class APIUtilities {
                 contentType(ContentType.URLENC.withCharset("UTF-8")).
                 spec(specification).
                 body(data.toString()).
-                post(endPoint);
+                post(endPoint)
+        ;
     }
 
     // Kullanıcı istediği endpoint'e post tipinde bağlanabilecek

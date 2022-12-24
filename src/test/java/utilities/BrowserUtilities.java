@@ -3,6 +3,9 @@ package utilities;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
@@ -14,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static stepDefinitions.ui.Hooks.driver;
+import static stepDefinitions.Hooks.driver;
 
 
 public class BrowserUtilities {
@@ -50,7 +53,7 @@ public class BrowserUtilities {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static WebElement waitForClickablility(WebElement element, int timeout) {
+    public static WebElement waitForClickability(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -190,27 +193,53 @@ public class BrowserUtilities {
                 });
     }
 
-    public static String getDay_day_month_year_time(int hourToSkip){
+    public static String getDay_day_month_year_time(int hourToSkip) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, hourToSkip);
         SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:MM:ss");
         return format1.format(cal.getTime());
     }
 
-    public static String createDate(int year,int month,int day) {
+    public static String createDate(int year, int month, int day) {
         DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;   //2022-12-23
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime date = now.plusYears(year).plusMonths(month).plusDays(day);
         return dtf.format(date);
     }
 
-    public static String createTime(int hour,int minute) {
+    public static String createTime(int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, hour);
         cal.add(Calendar.MINUTE, minute);
-        SimpleDateFormat simpleformat = new SimpleDateFormat("HH.mm");
-        String strTime = simpleformat.format(new Date());
-        return strTime;
+        SimpleDateFormat simpleformat = new SimpleDateFormat("HH:mm");
+        return simpleformat.format(cal.getTime());
+    }
+
+    public static void refreshPage() {
+        driver.navigate().refresh();
+        waitForPageToLoad(10);
+    }
+
+    public static void cleanTextInBox(WebElement element) {
+        String inputText = element.getAttribute("value");
+        if (inputText != null) {
+            for (int i = 0; i < inputText.length(); i++) {
+                element.sendKeys(Keys.BACK_SPACE);
+            }
+        }
+        waitFor(1);
+    }
+
+    public static void clearLocalSessionCookies() {
+        LocalStorage local = ((WebStorage) driver).getLocalStorage();
+        SessionStorage session = ((WebStorage) driver).getSessionStorage();
+        local.clear();
+        session.clear();
+        driver.manage().deleteAllCookies();
+    }
+
+    public static String getSessionId() {
+        return driver.manage().getCookieNamed("PHPSESSID").toString().split(";")[0];
     }
 
 

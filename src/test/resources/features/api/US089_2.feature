@@ -1,10 +1,12 @@
 Feature:
+
+  @ezra_login
   Scenario:
     When user creates a coupon
     Then user verifies the status code is 200
     Then user verifies that the response is as expected
-      | success                     | true    |
-      | promoCode.startsAt.timezone | UTC     |
+      | success                     | true |
+      | promoCode.startsAt.timezone | UTC  |
 
     When user gets all coupon info
     Then user verifies the status code is 200

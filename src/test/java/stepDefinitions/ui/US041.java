@@ -15,7 +15,7 @@ import utilities.ConfigReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static stepDefinitions.ui.Hooks.driver;
+import static stepDefinitions.Hooks.driver;
 
 public class US041 {
     LoginPage lp = new LoginPage();
@@ -107,7 +107,7 @@ public class US041 {
 
     @When("user clicks on Clients")
     public void userClicksOnClients() {
-        BrowserUtilities.waitForClickablility(cp.clients, 25);
+        BrowserUtilities.waitForClickability(cp.clients, 25);
         BrowserUtilities.clickWithJS(cp.clients);
     }
 
