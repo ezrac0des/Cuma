@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 
-import static stepDefinitions.ui.Hooks.driver;
+import static stepDefinitions.Hooks.driver;
 
 public class ReusableMethods {
 

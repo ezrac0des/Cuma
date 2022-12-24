@@ -9,7 +9,7 @@ public class US101 {
 
     @Given("user creates a timeoff block")
     public void userCreatesATimeoffBlock() {
-        timeoffId= APIUtilities.createTimeoff(
+        timeoffId = APIUtilities.createTimeoff(
                 //"2023-12-26"
                 BrowserUtilities.createDate(0, 2, 3),
                 BrowserUtilities.createTime(0, 0),
