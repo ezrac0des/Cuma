@@ -1,6 +1,7 @@
+@ezra_login
 Feature:
 
-  @ezra_login
+#  @ezra_login
   Scenario:
     Given user creates a timeoff block
     Then user verifies the status code is 200

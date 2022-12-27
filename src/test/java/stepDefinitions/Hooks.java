@@ -33,13 +33,15 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "screenshots");
         }
-        Driver.closeDriver();
+//        Driver.closeDriver();
     }
 
     @Before("@ezra_login")
     public void ezra_login(){
         login_qa(ConfigReader.getProperty("email"), ConfigReader.getProperty("password"));
     }
+
+
 
     public String login_qa(String email, String password) {
         List<String> windowHandles = new ArrayList<>(Driver.getDriver().getWindowHandles());
@@ -85,7 +87,11 @@ public class Hooks {
             BrowserUtilities.clickWithJS(commonPage.login().loginButton);
             BrowserUtilities.waitFor(3);
         }
+
+        //0. PHPSESSID
+        //1. isadol7sc2b67sodghm6qes978
         userSessionID = BrowserUtilities.getSessionId().split("=")[1];
+
         return userSessionID;
     }
 }
