@@ -18,7 +18,7 @@ Feature: US041
 
   Background:
     Given user goes to "/login"
-    When user logins to the website
+#    When user logins to the website
     And user clicks on Add Client
 
   Scenario: US041-TC001 -> visibility ve functionality

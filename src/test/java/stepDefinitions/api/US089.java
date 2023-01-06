@@ -42,8 +42,8 @@ public class US089 {
         List<String> expectedData = dataTable.column(1);
 
         for (int i = 0; i < paths.size(); i++) {
-            Assert.assertEquals(expectedData.get(i), response.jsonPath().getString(paths.get(i)));
             System.out.println("Expected data = " + expectedData.get(i) + " - Actual Data = " + response.jsonPath().getString(paths.get(i)));
+            Assert.assertEquals(expectedData.get(i), response.jsonPath().getString(paths.get(i)));
         }
 
         /*

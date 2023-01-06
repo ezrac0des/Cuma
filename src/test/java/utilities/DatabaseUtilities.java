@@ -7,9 +7,12 @@ public class DatabaseUtilities {
     public static final String DB_URL = "jdbc:mysql://51.158.107.22:6336/hypnotes";
     public static final String USER = "hypnotes";
     public static final String PASS = "hypnotes";
-    public static Connection connection = null;
-    public static PreparedStatement stmt = null;
-    public static ResultSet rs = null;
+    public static Connection connection = null; //bu baglanti
+    public static PreparedStatement stmt = null; //bu query
+    public static ResultSet rs = null; // bu cevap
+
+    //endpointe baglaniyorduk -> requestimizi gonderiyorduk -> gelen cevap uzerinden kontrol yapiyorduk
+    //database'e baglan -> query'i gonder -> gelen cevap uzerinden kontrol yapiyorduk
 
     public static Connection getConnection() {
         try {

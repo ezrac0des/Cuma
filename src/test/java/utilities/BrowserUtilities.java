@@ -196,7 +196,7 @@ public class BrowserUtilities {
     public static String getDay_day_month_year_time(int hourToSkip) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, hourToSkip);
-        SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:MM:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
         return format1.format(cal.getTime());
     }
 
@@ -212,7 +212,7 @@ public class BrowserUtilities {
         cal.add(Calendar.HOUR, hour);
         cal.add(Calendar.MINUTE, minute);
         SimpleDateFormat simpleformat = new SimpleDateFormat("HH:mm");
-        return simpleformat.format(cal.getTime());
+        return simpleformat.format(cal.getTime()); //saat, dakika
     }
 
     public static void refreshPage() {
@@ -240,6 +240,8 @@ public class BrowserUtilities {
 
     public static String getSessionId() {
         return driver.manage().getCookieNamed("PHPSESSID").toString().split(";")[0];
+        //0. PHPSESSID=isadol7sc2b67sodghm6qes978
+        //1. Path=/
     }
 
 
