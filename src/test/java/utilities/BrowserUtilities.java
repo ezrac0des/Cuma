@@ -196,7 +196,7 @@ public class BrowserUtilities {
     public static String getDay_day_month_year_time(int hourToSkip) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, hourToSkip);
-        SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:MM:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
         return format1.format(cal.getTime());
     }
 

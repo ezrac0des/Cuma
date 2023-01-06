@@ -83,6 +83,79 @@ public class APIUtilities {
         return response.jsonPath().getInt("data[0].id");
     }
 
+    public static void notCreateCertificate(String title, String organization) {
+        payload.put("title", title);
+        payload.put("organization", organization);
+
+        response = given()
+                .spec(specification)
+                .formParams(payload)
+                .post("/profile/addCertificate");
+
+        response.prettyPrint();
+
+    }
+
+    public static int createCertificate(String title, String organization, String date) {
+        payload.put("title", title);
+        payload.put("organization", organization);
+        payload.put("date", date);
+
+        response = given()
+                .spec(specification)
+                .formParams(payload)
+                .post("/profile/addCertificate");
+
+        response.prettyPrint();
+
+        return response.jsonPath().getInt("certificate.id");
+    }
+
+    public static void updateCertificate(String title, String organization, String date, int id) {
+        payload.put("title", title);
+        payload.put("organization", organization);
+        payload.put("date", date);
+        payload.put("certificateId", id);
+
+        response = given()
+                .spec(specification)
+                .formParams(payload)
+                .post("/profile/updateCertificate");
+
+        response.prettyPrint();
+    }
+
+    public static void deleteCertificate(int id) {
+        payload.put("certificateId", id);
+
+        response = given()
+                .spec(specification)
+                .formParams(payload)
+                .post("/profile/removeCertificate");
+
+        response.prettyPrint();
+    }
+
+    public static List<Integer> getUser() {
+        response = given()
+                .spec(specification)
+                .post("/dashboard/getUser");
+
+//        response.prettyPrint();
+
+        return response.jsonPath().getList("profile.certificates.id");
+    }
+
+    public static List<Boolean> getUserActive() {
+        response = given()
+                .spec(specification)
+                .post("/dashboard/getUser");
+
+//        response.prettyPrint();
+
+        return response.jsonPath().getList("profile.certificates.isActive");
+    }
+
 
     //Cookie ekleme
     public static void addCookie(String key, String value) {
