@@ -21,7 +21,7 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        driver = Driver.getDriver();
+//        driver = Driver.getDriver();
         commonPage = new CommonPage() {
         };
     }
@@ -29,10 +29,10 @@ public class Hooks {
     @After
     public void tearDown(Scenario scenario) {
 
-        if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "screenshots");
-        }
+//        if (scenario.isFailed()) {
+//            final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+//            scenario.attach(screenshot, "image/png", "screenshots");
+//        }
 //        Driver.closeDriver();
     }
 

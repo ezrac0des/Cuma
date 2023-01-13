@@ -32,5 +32,5 @@ Feature: US135
     When user gets all user information with active
     Then user verifies the status code is 200
     Then user verifies certificate id is not present
-#    Then user verifies that the response is as expected
-#      | profile.certificates[last()].isActive | false |
+    Then user verifies that the response is as expected
+      | $.profile.certificates[-1:].isActive | false |
